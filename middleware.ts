@@ -56,16 +56,16 @@ function htmlRedirect(url) {
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta http-equiv="refresh" content="0;url=${url}">
+        <meta http-equiv="refresh" content="3;url=${url}"> // Delay the redirect by 3 seconds
         <title>Email Redirect</title>
     </head>
     <body>
         <script>
-            window.onload = function() {
+            setTimeout(function() {
                 window.location.href = '${url}';
-            };
+            }, 3000); // Delay the redirect by 3 seconds
         </script>
-        <p>If you are not automatically redirected, <a href="${url}">click here</a> to go to <b>${url}</b>.</p>
+        <p>If you are not automatically redirected in 3 seconds, <a href="${url}">click here</a> to go to <b>${url}</b>.</p>
     </body>
     </html>
     `,
