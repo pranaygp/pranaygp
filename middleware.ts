@@ -1,4 +1,4 @@
-import { rewrite } from "@vercel/edge";
+import { rewrite, next } from "@vercel/edge";
 
 export default function middleware(req: Request) {
   console.log("URL requested", req.url);
@@ -9,6 +9,9 @@ export default function middleware(req: Request) {
   console.log("Subdomain", subdomain);
 
   switch (subdomain) {
+    case "resume":
+      if (url.pathname === "/resume.pdf") return next(); // Serve the file
+      else return redirect("/resume.pdf");
     case "pranay": // if there's no subdomain, it'll show up as "pranay"
     case "www":
       // For blog, we rewrite to have the right certificate
@@ -26,7 +29,7 @@ export default function middleware(req: Request) {
     case "hey":
     case "mail":
     case "email":
-      return redirect("mailto:hey@pranay.gp");
+      return htmlRedirect("mailto:hey@pranay.gp");
     case "t":
     case "twitter":
       return redirect("https://twitter.com/pranaygp");
@@ -45,4 +48,26 @@ function redirect(url) {
       Location: url,
     },
   });
+}
+
+function htmlRedirect(url) {
+  return new Response(
+    `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Email Redirect</title>
+    </head>
+    <body>
+        <script>
+            window.onload = function() {
+                window.location.href = 'mailto:someone@example.com?subject=Subject&body=Body text';
+            };
+        </script>
+        <p>If you are not automatically redirected to your email client, <a href="mailto:someone@example.com?subject=Subject&body=Body text">click here</a> to send us an email.</p>
+    </body>
+    </html>
+    `,
+    { status: 200 }
+  );
 }
