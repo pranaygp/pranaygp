@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { rewrite } from "@vercel/edge";
 
 export default function middleware(req: Request) {
@@ -32,6 +31,6 @@ export default function middleware(req: Request) {
     case "github":
       return rewrite("https://github.com/pranaygp");
     default:
-      return new NextResponse("Not found", { status: 404 });
+      return new Response("Not found", { status: 404 });
   }
 }
