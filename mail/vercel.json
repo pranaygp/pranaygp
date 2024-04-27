@@ -1,0 +1,10 @@
+{
+  "public": true,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "mailto:hey@pranay.gp",
+      "permanent": true
+    }
+  ]
+}
