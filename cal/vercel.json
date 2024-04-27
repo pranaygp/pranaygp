@@ -2,7 +2,7 @@
   "public": true,
   "redirects": [
     {
-      "source": "/ (.*)",
+      "source": "/(.*)",
       "destination": "https://cal.com/pranay",
       "permanent": true
     }
