@@ -1,5 +1,16 @@
 import { rewrite, next } from "@vercel/edge";
 
+const descriptions = {
+  www: "Blog",
+  pgp: "PGP Key",
+  cal: "Calendar",
+  email: "Email",
+  x: "X/Twitter",
+  github: "GitHub",
+  ig: "Instagram",
+  resume: "Download my resume",
+};
+
 export default function middleware(req: Request) {
   console.log("URL requested", req.url);
 
@@ -40,7 +51,7 @@ export default function middleware(req: Request) {
     case "instagram":
       return redirect("https://instagram.com/pranaygp");
     default:
-      return new Response("Not found", { status: 404 });
+      return list();
   }
 }
 
@@ -68,6 +79,31 @@ function htmlRedirect(url) {
             }, 2000); // Delay the redirect by 2 seconds
         </script>
         <p>If you are not automatically redirected in 2 seconds, <a href="${url}">click here</a> to go to <b>${url}</b>.</p>
+    </body>
+    </html>
+    `,
+    { status: 200, headers: { "Content-Type": "text/html" } }
+  );
+}
+
+function list() {
+  return new Response(
+    `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>@pranaygp linktree</title>
+    </head>
+    <body>
+        <h1>The @pranaygp linktree</h1>
+        <ul>
+            ${Object.entries(descriptions)
+              .map(
+                ([key, value]) =>
+                  `<li><b><a href="https://${key}.pranay.gp">${key}.pranay.gp</a></b> - ${value}</li>`
+              )
+              .join("")}
+        </ul>
     </body>
     </html>
     `,
