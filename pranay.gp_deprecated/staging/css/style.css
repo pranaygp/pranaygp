@@ -1,0 +1,495 @@
+/*****************************
+********* Font Imports *******
+*****************************/
+
+/*********** Lato **********/
+
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/lato/Lato-Hai.ttf);
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/lato/Lato-HaiIta.ttf);
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/lato/Lato-Lig.ttf);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/lato/Lato-LigIta.ttf);
+    font-weight: lighter;
+    font-style: 300;
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/lato/Lato-Reg.ttf);
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/lato/Lato-RegIta.ttf);
+    font-style: italic;
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/lato/Lato-Bol.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/lato/Lato-BolIta.ttf);
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/lato/Lato-Bla.ttf);
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/lato/Lato-BlaIta.ttf);
+    font-weight: ;
+    font-style: italic;
+}
+
+/********** Raleway ********/
+
+
+@font-face {
+    font-family: Raleway;
+    src: url(../fonts/raleway/Raleway-Thin.otf);
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(../fonts/raleway/Raleway-ExtraLight.otf);
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(../fonts/raleway/Raleway-Light.otf);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(../fonts/raleway/Raleway-Regular.otf);
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(../fonts/raleway/Raleway-Medium.otf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(../fonts/raleway/Raleway-SemiBold.otf);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(../fonts/raleway/Raleway-Bold.otf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(../fonts/raleway/Raleway-ExtraBold.otf);
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(../fonts/raleway/Raleway-Heavy.otf);
+    font-weight: 900;
+}
+
+
+
+/*****************************
+******* Text styles ******
+*****************************/
+
+body{
+    font-family: Lato;
+    font-weight: 300;
+}
+
+.hairline, .thin{
+    font-weight: 100;
+}
+
+.light{
+    font-weight: 300;
+}
+
+.medium{
+    font-weight: 500;
+}
+
+.bold{
+    font-family: Lato;
+    font-weight: normal;
+}
+
+.footnote{
+    font-size: 9pt;
+}
+
+.heading{
+    font-family: Lato;
+    font-size: 36px;
+    color: #1792FF;
+    line-height: 44px;
+    text-align: center;
+    font-weight: 300;
+}
+
+.resume{
+    font-size: 12pt;
+    line-height: 13pt;
+}
+
+.resume .heading{
+    font-size: 16pt;
+    line-height:17pt;
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.resume .sub-heading{
+    font-family: Lato;
+    font-weight: bold;
+    font-size: 12pt;
+    line-height:13pt;
+}
+
+.resume .description{
+    font-family: Raleway;
+    font-weight: 500;
+    font-size: 11pt;
+    line-height:12pt;
+}
+
+.resume .location{
+    font-family: Raleway;
+    font-weight: 500;
+    font-size: 10pt;
+    color: #6A6A6A;
+    line-height:12pt;
+}
+
+/*****************************
+*********** Colors ***********
+*****************************/
+
+.bkg-green{
+    background-color: #468966;
+}
+
+.bkg-yellow{
+    background-color: #FFB03B;
+}
+
+.bkg-red{
+    background-color: #B64926;
+}
+
+.txt-white{
+    color: #fff !important;
+}
+
+
+/*****************************
+********* Page styles ********
+*****************************/
+
+html{
+    overflow-x: hidden;
+}
+
+body{
+    margin: 0px;
+    overflow-x: hidden;
+}
+
+#wrapper{
+    overflow-x: hidden;
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+}
+
+#contact{
+    font-family: Raleway;
+    font-size: 14pt;
+    background-color: #8E2800;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    z-index: 100;
+
+
+/*
+    margin: 0 -9999rem;
+   add back negative margin value
+  padding: 0.25rem 9999rem;
+*/
+    overflow-y: auto;
+}
+
+.heading{
+    margin-top: 31px;
+    margin-bottom: 20px;
+}
+
+.fullscreen-header{
+    background-image: url(../images/fullscreen_background.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    bottom: 0;
+    left: 0;
+    margin: 0px;
+    overflow: auto;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.fullscreen-header .text-container{
+    color: white;
+    font-family: Lato;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 8%;
+}
+
+.fullscreen-header .text-container .name-container{
+    font-size: 62pt;
+    margin: 0 10px;
+}
+
+
+
+#overview-page #panel-container{
+    margin-top: 10px;
+    list-style: none;
+    overflow: auto;
+}
+
+#overview-page #panel-container .panel .outer-circle{
+    background: #FFF0A5;
+    border: 1px solid #979797;
+    width: 185px;
+    height: 185px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: calc(185px/2);
+    margin-bottom: 15px;
+}
+#overview-page #panel-container .panel .outer-circle .inner-circle{
+    width: 153px;
+    height: 153px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 16px;
+    border-radius: calc(153px/2);
+}
+#overview-page #panel-container .panel .outer-circle .inner-circle .text{
+    font-family: FontAwesome;
+    font-size: 144px;
+    color: #333333;
+    line-height: 144px;
+}
+
+#overview-page #panel-container .panel .text{
+    margin-top:15px;
+    font-family: Lato;
+    font-size: 14px;
+    color: #4A4A4A;
+    line-height: 17px;
+}
+
+
+#skills-page .skills-container {
+    /* Rectangle 5: */
+    /*    background-color: #B64926;*/
+    /*    display: block;*/
+    /*    padding: 10px;*/
+    /*
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: 100px;
+    */
+    /*    width: 100%;*/
+}
+
+.grid-img {
+    max-height: 115px;
+    max-width: 100%;
+    height: auto !important;
+    width: auto !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+.panel {
+    margin-bottom: 10px;
+}
+
+.more-container {
+    text-align: center;
+    font-family: Lato;
+    /*    vertical-align: middle;*/
+    color: #753019;
+}
+
+.more-container:hover{
+    color: #FFB03B;
+}
+
+.more {
+    padding: 0;
+    margin-top: -15px;
+    font-size: 240px;
+    line-height: 135px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+a:hover{
+    color: #FFB03B;
+}
+
+.heading-container {
+    overflow: auto;
+}
+
+#alternate-projects {
+    top: 64px;
+    position: absolute;
+/*    height: 30vh;*/
+    overflow: hidden;
+    opacity: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+#projects-page-heading {
+    position: absolute;
+    left:0;
+}
+
+.projects-container {
+    top: 64px;
+}
+
+#projects-page {
+/*    height: calc(135px + 100vh);*/
+}
+
+.placeholder{
+    height: 100vh;
+}
+
+#work-experience-heading {
+    position: absolute;
+}
+
+#work-experience-resume-pin {
+    padding-top: 20px;
+}
+
+#alternate-skills {
+    position: fixed;
+    top: 0px;
+/*    left: 0px;*/
+/*    left: calc(-1 * (31% + 1% + 10px) );*/
+    margin-left: -1%;
+/*    padding-left: calc(1% + 10px);*/
+    padding-top: 1000px;
+    z-index: 50;
+    width: 29%;
+    min-height: 100vh;
+    padding-right: 2%;
+    padding-left: 2%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: none;
+}
+
+#resume-pdf {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+}
+
+#content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    width: 100vw;
+}
+
+.page2{
+    overflow-y: hidden;
+    border-bottom: 15px solid #B64926;
+}
+
+
+
+.contact-icon {
+    font-size: 30pt;
+    padding: 2pt;
+    line-height: 34pt;
+    vertical-align: middle;
+}
+
+.hidden-container {
+/*    height: 0px;*/
+/*    overflow-y: hidden;*/
+    opacity: 0;
+    display: none;
+}
+
+.no-pointer-events{
+    pointer-events: none;
+}
+
+.pre-resume-projects-container {
+    text-align: center;
+}

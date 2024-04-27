@@ -1,0 +1,10 @@
+{
+  "public": true,
+  "redirects": [
+    {
+      "source": "/ (.*)",
+      "destination": "https://cal.com/pranay",
+      "permanent": true
+    }
+  ]
+}
