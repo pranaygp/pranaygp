@@ -8,7 +8,7 @@ const descriptions = {
   x: "X/Twitter",
   github: "GitHub",
   ig: "Instagram",
-  resume: "Download my resume",
+  resume: "Download my resume (outdated)",
 };
 
 export default function middleware(req: Request) {
