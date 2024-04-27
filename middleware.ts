@@ -61,10 +61,10 @@ function htmlRedirect(url) {
     <body>
         <script>
             window.onload = function() {
-                window.location.href = 'mailto:someone@example.com?subject=Subject&body=Body text';
+                window.location.href = '${url}';
             };
         </script>
-        <p>If you are not automatically redirected to your email client, <a href="mailto:someone@example.com?subject=Subject&body=Body text">click here</a> to send us an email.</p>
+        <p>If you are not automatically redirected, <a href="${url}">click here</a> to go to <b>${url}</b>.</p>
     </body>
     </html>
     `,
