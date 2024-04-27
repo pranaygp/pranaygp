@@ -62,9 +62,9 @@ function htmlRedirect(url) {
         <script>
             setTimeout(function() {
                 window.location.href = '${url}';
-            }, 3000); // Delay the redirect by 3 seconds
+            }, 2000); // Delay the redirect by 2 seconds
         </script>
-        <p>If you are not automatically redirected in 3 seconds, <a href="${url}">click here</a> to go to <b>${url}</b>.</p>
+        <p>If you are not automatically redirected in 2 seconds, <a href="${url}">click here</a> to go to <b>${url}</b>.</p>
     </body>
     </html>
     `,
