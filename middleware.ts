@@ -30,7 +30,7 @@ export default function middleware(req: Request) {
     case "mail":
     case "email":
       return htmlRedirect("mailto:hey@pranay.gp");
-    case "t":
+    case "x":
     case "twitter":
       return redirect("https://twitter.com/pranaygp");
     case "g":
