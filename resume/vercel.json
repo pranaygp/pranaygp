@@ -1,0 +1,10 @@
+{
+  "public": true,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "/resume.pdf",
+      "permanent": true
+    }
+  ]
+}
