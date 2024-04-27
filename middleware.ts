@@ -36,6 +36,9 @@ export default function middleware(req: Request) {
     case "g":
     case "github":
       return redirect("https://github.com/pranaygp");
+    case "ig":
+    case "instagram":
+      return redirect("https://instagram.com/pranaygp");
     default:
       return new Response("Not found", { status: 404 });
   }
