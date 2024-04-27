@@ -1,4 +1,4 @@
-# Redirects
+# pranaygp
 
 This comntains various redirects or personal files for pranay.gp
 
