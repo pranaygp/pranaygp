@@ -68,6 +68,6 @@ function htmlRedirect(url) {
     </body>
     </html>
     `,
-    { status: 200 }
+    { status: 200, headers: { "Content-Type": "text/html" } }
   );
 }
