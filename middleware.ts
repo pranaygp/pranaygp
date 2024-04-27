@@ -92,10 +92,10 @@ function list() {
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>@pranaygp linktree</title>
+        <title>pranaygp linktree</title>
     </head>
     <body>
-        <h1>The @pranaygp linktree</h1>
+        <h1>The pranaygp linktree</h1>
         <ul>
             ${Object.entries(descriptions)
               .map(
