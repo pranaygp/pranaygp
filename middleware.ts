@@ -31,7 +31,7 @@ export default function middleware(req: Request) {
     case "pgp":
     case "key":
       return redirect(
-        "https://keys.openpgp.org/vks/v1/by-fingerprint/69CC0E8F6D41F6373F9DAE17547249897F9BE56F"
+        "https://keys.openpgp.org/vks/v1/by-fingerprint/816396CE9A9CC46B0B2D3C8466F99659865FD676"
       );
     case "cal":
     case "calendar":
