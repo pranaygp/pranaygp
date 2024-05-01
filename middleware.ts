@@ -8,6 +8,7 @@ const descriptions = {
   x: "X/Twitter",
   github: "GitHub",
   ig: "Instagram",
+  li: "Linkedin",
   resume: "Download my resume (outdated)",
 };
 
