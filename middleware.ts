@@ -50,6 +50,9 @@ export default function middleware(req: Request) {
     case "ig":
     case "instagram":
       return redirect("https://instagram.com/pranaygp");
+    case "li":
+    case "linkedin":
+      return redirect("https://www.linkedin.com/in/pranaygp");
     default:
       return list();
   }
