@@ -24,6 +24,9 @@ export default function middleware(req: Request) {
     case "resume":
       if (url.pathname === "/resume.pdf") return next(); // Serve the file
       else return redirect("/resume.pdf");
+    case "qiuling":
+      if (url.pathname === "/qiuling.ttf") return next(); // Serve the file
+      else return redirect("/qiuling.ttf");
     case "pranay": // if there's no subdomain, it'll show up as "pranay"
     case "www":
       // For blog, we rewrite to have the right certificate
