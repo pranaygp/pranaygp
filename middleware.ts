@@ -12,6 +12,11 @@ const descriptions = {
   resume: "Download my resume (outdated)",
 };
 
+const hidden = {
+  static: "Static Assets",
+  qiuling: "The Qiuling Font",
+};
+
 export default function middleware(req: Request) {
   console.log("URL requested", req.url);
 
@@ -21,6 +26,8 @@ export default function middleware(req: Request) {
   console.log("Subdomain", subdomain);
 
   switch (subdomain) {
+    case "static":
+      return next();
     case "resume":
       if (url.pathname === "/resume.pdf") return next(); // Serve the file
       else return redirect("/resume.pdf");
@@ -110,6 +117,12 @@ function list() {
                   `<li><b><a href="https://${key}.pranay.gp">${key}.pranay.gp</a></b> - ${value}</li>`
               )
               .join("")}
+              ${Object.entries(hidden)
+                .map(
+                  ([key, value]) =>
+                    `<li style="color:white;"><b><a color="white" style="color:white;cursor:default;" href="https://${key}.pranay.gp">${key}.pranay.gp</a></b> - ${value}</li>`
+                )
+                .join("")}
         </ul>
     </body>
     </html>
