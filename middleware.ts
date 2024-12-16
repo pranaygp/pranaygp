@@ -27,7 +27,11 @@ export default function middleware(req: Request) {
 
   switch (subdomain) {
     case "static":
-      return next();
+      return next({
+        headers: {
+          "Cache-Control": "public, max-age=86400, stale-while-revalidate=1",
+        },
+      });
     case "resume":
       if (url.pathname === "/resume.pdf") return next(); // Serve the file
       else return redirect("/resume.pdf");
