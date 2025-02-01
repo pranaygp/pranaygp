@@ -10,6 +10,7 @@ const descriptions = {
   ig: "Instagram",
   li: "Linkedin",
   resume: "Download my resume (outdated)",
+  mirror: "A mirror",
 };
 
 const hidden = {
