@@ -39,8 +39,8 @@ export default function middleware(req: Request) {
       else return redirect("/resume.pdf");
     case "call":
     case "video":
-      if (url.pathname === "/call") return next(); // Serve the file
-      else return redirect("/call");
+      if (url.pathname === "/call.html") return next(); // Serve the file
+      else return redirect("/call.html");
     case "qiuling":
       if (url.pathname === "/qiuling.ttf") return next(); // Serve the file
       else return redirect("/qiuling.ttf");
