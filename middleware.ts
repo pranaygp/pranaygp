@@ -3,7 +3,8 @@ import { rewrite, next } from "@vercel/edge";
 const descriptions = {
   www: "Blog",
   pgp: "PGP Key",
-  cal: "Calendar",
+  call: "Video Call Room",
+  calendar: "Calendar",
   email: "Email",
   x: "X/Twitter",
   github: "GitHub",
@@ -36,6 +37,10 @@ export default function middleware(req: Request) {
     case "resume":
       if (url.pathname === "/resume.pdf") return next(); // Serve the file
       else return redirect("/resume.pdf");
+    case "call":
+    case "video":
+      if (url.pathname === "/call") return next(); // Serve the file
+      else return redirect("/call");
     case "qiuling":
       if (url.pathname === "/qiuling.ttf") return next(); // Serve the file
       else return redirect("/qiuling.ttf");
@@ -49,7 +54,6 @@ export default function middleware(req: Request) {
       return redirect(
         "https://keys.openpgp.org/vks/v1/by-fingerprint/816396CE9A9CC46B0B2D3C8466F99659865FD676"
       );
-    case "cal":
     case "calendar":
       return redirect("https://cal.com/pranay");
     case "e":
