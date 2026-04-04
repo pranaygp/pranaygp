@@ -1,11 +1,32 @@
 {
   "name": "pranaygp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Pranay Prakash's personal site and blog",
   "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "keywords": [],
   "author": "Pranay Prakash <hey@pranay.gp>",
   "dependencies": {
-    "@vercel/edge": "^1.1.1"
+    "@tailwindcss/typography": "^0.5.16",
+    "@vercel/edge": "^1.1.1",
+    "gray-matter": "^4.0.3",
+    "next": "^15.3.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.2",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3"
   }
 }

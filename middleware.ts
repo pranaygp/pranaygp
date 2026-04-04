@@ -1,6 +1,6 @@
-import { rewrite, next } from "@vercel/edge";
+import { NextRequest, NextResponse } from "next/server";
 
-const descriptions = {
+const descriptions: Record<string, string> = {
   www: "Blog",
   pgp: "PGP Key",
   call: "Video Call Room",
@@ -14,12 +14,12 @@ const descriptions = {
   mirror: "A mirror",
 };
 
-const hidden = {
+const hidden: Record<string, string> = {
   static: "Static Assets",
   qiuling: "The Qiuling Font",
 };
 
-export default function middleware(req: Request) {
+export function middleware(req: NextRequest) {
   console.log("URL requested", req.url);
 
   const url = new URL(req.url);
@@ -29,26 +29,25 @@ export default function middleware(req: Request) {
 
   switch (subdomain) {
     case "static":
-      return next({
+      return NextResponse.next({
         headers: {
           "Cache-Control": "public, max-age=86400, stale-while-revalidate=1",
         },
       });
     case "resume":
-      if (url.pathname === "/resume.pdf") return next(); // Serve the file
+      if (url.pathname === "/resume.pdf") return NextResponse.next();
       else return redirect("/resume.pdf");
     case "call":
     case "video":
-      if (url.pathname === "/call.html") return next(); // Serve the file
+      if (url.pathname === "/call.html") return NextResponse.next();
       else return redirect("/call.html");
     case "qiuling":
-      if (url.pathname === "/qiuling.ttf") return next(); // Serve the file
+      if (url.pathname === "/qiuling.ttf") return NextResponse.next();
       else return redirect("/qiuling.ttf");
     case "pranay": // if there's no subdomain, it'll show up as "pranay"
     case "www":
-      // For blog, we rewrite to have the right certificate
-      url.host = "blog.pranay.gp"; // svbtle
-      return rewrite(url);
+      // Serve the Next.js blog for the main domain
+      return NextResponse.next();
     case "pgp":
     case "key":
       return redirect(
@@ -74,20 +73,33 @@ export default function middleware(req: Request) {
     case "linkedin":
       return redirect("https://www.linkedin.com/in/pranaygp");
     default:
+      // For localhost or unknown subdomains, serve the app
+      if (subdomain === "localhost" || url.host === "localhost:3000") {
+        return NextResponse.next();
+      }
       return list();
   }
 }
 
-function redirect(url) {
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except Next.js internals and static files
+     */
+    "/((?!_next/static|_next/image|favicon.ico).*)",
+  ],
+};
+
+function redirect(url: string) {
   return new Response(null, {
-    status: 308, // Permanent Redirect
+    status: 308,
     headers: {
       Location: url,
     },
   });
 }
 
-function htmlRedirect(url) {
+function htmlRedirect(url: string) {
   return new Response(
     `<!DOCTYPE html>
     <html lang="en">
@@ -99,7 +111,7 @@ function htmlRedirect(url) {
         <script>
             setTimeout(function() {
                 window.location.href = '${url}';
-            }, 2000); // Delay the redirect by 2 seconds
+            }, 2000);
         </script>
         <p>If you are not automatically redirected in 2 seconds, <a href="${url}">click here</a> to go to <b>${url}</b>.</p>
     </body>
