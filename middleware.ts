@@ -74,7 +74,7 @@ export function middleware(req: NextRequest) {
       return redirect("https://www.linkedin.com/in/pranaygp");
     default:
       // For localhost or unknown subdomains, serve the app
-      if (subdomain === "localhost" || url.host === "localhost:3000") {
+      if (subdomain === "localhost" || url.host === "localhost:3000" || url.host.includes("vercel.app")) {
         return NextResponse.next();
       }
       return list();
