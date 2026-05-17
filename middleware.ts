@@ -12,6 +12,7 @@ const descriptions = {
   li: "Linkedin",
   resume: "Download my resume (outdated)",
   mirror: "A mirror",
+  avatar: "Inclusive Avatar Generator",
 };
 
 const hidden = {
@@ -73,6 +74,9 @@ export default function middleware(req: Request) {
     case "li":
     case "linkedin":
       return redirect("https://www.linkedin.com/in/pranaygp");
+    case "avatar":
+      url.host = "avatar-teal-seven.vercel.app";
+      return rewrite(url);
     default:
       return list();
   }
