@@ -39,7 +39,7 @@ export default async function BlogPost({
           href="/blog"
           className="text-sm text-neutral-500 hover:text-neutral-300 transition-colors"
         >
-          ← Back
+          ← Essays
         </Link>
       </nav>
 

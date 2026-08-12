@@ -68,6 +68,22 @@ export function getAllPosts(): PostMeta[] {
   return posts.sort((a, b) => (a.date > b.date ? -1 : 1));
 }
 
+// Whether drafts should be publicly visible.
+// - Always visible in local dev.
+// - Visible on Vercel *preview* deployments (so you can review from your phone).
+// - Hidden on production.
+export function showDrafts(): boolean {
+  if (process.env.NODE_ENV !== "production") return true;
+  return process.env.VERCEL_ENV === "preview";
+}
+
+// Posts to show in public listings, respecting draft visibility.
+export function getVisiblePosts(): PostMeta[] {
+  const posts = getAllPosts();
+  if (showDrafts()) return posts;
+  return posts.filter((p) => !p.draft);
+}
+
 export function getAllSlugs(): string[] {
   const slugs: string[] = [];
   for (const { dir } of getPostDirs()) {

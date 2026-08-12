@@ -1,23 +1,25 @@
 import Link from "next/link";
-import { getAllPosts } from "@/lib/posts";
+import { getVisiblePosts } from "@/lib/posts";
 
 export const metadata = {
-  title: "Blog",
+  title: "Essays",
 };
 
 export default function BlogIndex() {
-  const posts = getAllPosts();
+  const posts = getVisiblePosts();
 
   return (
     <main>
       <header className="mb-16">
-        <Link href="/blog" className="group">
+        <Link href="/" className="group">
           <h1 className="text-2xl font-bold text-neutral-100 tracking-tight">
-            pranay.gp
+            Essays
           </h1>
         </Link>
         <p className="text-neutral-500 mt-1 text-sm">
-          Pranay Prakash
+          <Link href="/" className="hover:text-neutral-300 transition-colors">
+            ← Pranay Prakash
+          </Link>
         </p>
       </header>
 
