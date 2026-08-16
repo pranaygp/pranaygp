@@ -102,6 +102,7 @@ export const projects: Project[] = [
     description:
       "One of my first open-source devtools, made to learn. An easy way to make any website editable, from before I knew what a CDN was.",
     featured: { type: "static", value: "2016 · early project" },
+    archived: true,
     links: [{ label: "GitHub", href: "https://github.com/pranaygp/pedit" }],
   },
   {
@@ -110,6 +111,7 @@ export const projects: Project[] = [
     description:
       "An MP3 downloader I built in high school, used by me and my classmates. One of my oldest projects, from just after I learned Git.",
     featured: { type: "static", value: "2015 · high school" },
+    archived: true,
     links: [{ label: "GitHub", href: "https://github.com/pranaygp/birdle" }],
   },
 ];
