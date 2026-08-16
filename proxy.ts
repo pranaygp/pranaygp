@@ -20,6 +20,18 @@ const hidden: Record<string, string> = {
   qiuling: "The Qiuling Font",
 };
 
+// Posts imported from the old Svbtle blog. These used to live at the APEX
+// (pranay.gp/<slug>) and at blog.pranay.gp/<slug>. They now live at
+// pranay.gp/blog/<slug>. We 301-redirect the old flat URLs to the new
+// canonical location so long-standing backlinks keep working.
+const legacySlugs = new Set<string>([
+  "how-to-learn-things-at-1000x-the-speed",
+  "a-case-for-nihilism",
+  "musings-on-a-train-to-paris",
+  "rfc-request-for-company-a-videobook-platform",
+  "say-their-name",
+]);
+
 export function proxy(req: NextRequest) {
   console.log("URL requested", req.url);
 
@@ -45,10 +57,24 @@ export function proxy(req: NextRequest) {
     case "qiuling":
       if (url.pathname === "/qiuling.ttf") return NextResponse.next();
       else return redirect("/qiuling.ttf");
+    case "blog": {
+      // Legacy blog.pranay.gp/* → canonical apex. Preserves old backlinks.
+      // blog.pranay.gp/<slug>  → https://pranay.gp/blog/<slug>
+      // blog.pranay.gp/        → https://pranay.gp/blog
+      const seg = url.pathname.replace(/^\/+|\/+$/g, "");
+      const dest = seg ? `https://pranay.gp/blog/${seg}` : "https://pranay.gp/blog";
+      return redirect(dest, 301);
+    }
     case "pranay": // if there's no subdomain, it'll show up as "pranay"
-    case "www":
-      // Serve the Next.js blog for the main domain
+    case "www": {
+      // Serve the Next.js blog for the main domain, BUT first honor the old
+      // flat post URLs (pranay.gp/<slug>) by redirecting them to /blog/<slug>.
+      const seg = url.pathname.replace(/^\/+|\/+$/g, "");
+      if (legacySlugs.has(seg)) {
+        return redirect(`https://pranay.gp/blog/${seg}${url.search}`, 301);
+      }
       return NextResponse.next();
+    }
     case "pgp":
     case "key":
       return redirect(
@@ -99,9 +125,9 @@ export const config = {
   ],
 };
 
-function redirect(url: string) {
+function redirect(url: string, status: number = 308) {
   return new Response(null, {
-    status: 308,
+    status,
     headers: {
       Location: url,
     },

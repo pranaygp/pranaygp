@@ -52,6 +52,12 @@ export default async function BlogPost({
             <time className="text-sm text-neutral-500 tabular-nums">
               {post.date}
             </time>
+            {post.kudos > 0 && (
+              <span className="text-sm text-neutral-500">
+                <span className="text-amber-400/90">♥</span>{" "}
+                {post.kudos.toLocaleString()} kudos
+              </span>
+            )}
             {post.draft && (
               <span className="text-xs text-amber-500/80 font-medium uppercase tracking-wider">
                 Draft

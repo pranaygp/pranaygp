@@ -11,6 +11,9 @@ export interface PostMeta {
   draft: boolean;
   tags: string[];
   excerpt: string;
+  kudos: number;
+  source?: string;
+  originalUrl?: string;
 }
 
 export interface Post extends PostMeta {
@@ -60,6 +63,9 @@ export function getAllPosts(): PostMeta[] {
         draft: data.draft ?? isDraft,
         tags: data.tags || [],
         excerpt,
+        kudos: typeof data.kudos === "number" ? data.kudos : 0,
+        source: data.source,
+        originalUrl: data.original_url,
       });
     }
   }
@@ -120,6 +126,9 @@ export async function getPost(slug: string): Promise<Post | null> {
         draft: data.draft ?? isDraft,
         tags: data.tags || [],
         excerpt,
+        kudos: typeof data.kudos === "number" ? data.kudos : 0,
+        source: data.source,
+        originalUrl: data.original_url,
         contentHtml,
       };
     }

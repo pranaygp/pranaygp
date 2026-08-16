@@ -37,6 +37,12 @@ export default function BlogIndex() {
                   <time className="text-sm text-neutral-500 tabular-nums shrink-0">
                     {post.date}
                   </time>
+                  {post.kudos > 0 && (
+                    <span className="text-sm text-neutral-500 shrink-0">
+                      <span className="text-amber-400/90">♥</span>{" "}
+                      {post.kudos.toLocaleString()}
+                    </span>
+                  )}
                   {post.draft && (
                     <span className="text-xs text-amber-500/80 font-medium uppercase tracking-wider">
                       Draft
