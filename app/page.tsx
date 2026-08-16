@@ -9,6 +9,7 @@ import { getVscodeInstalls, getNpmWeekly, getGithubStars, compactNumber } from "
 import KudosBadge from "@/components/KudosBadge";
 import { socialIcon } from "@/components/SocialIcons";
 import ProjectList, { type ProjectView } from "@/components/ProjectList";
+import Collapsible from "@/components/Collapsible";
 
 // Live kudos + project metrics come from external sources, so render dynamically.
 export const dynamic = "force-dynamic";
@@ -232,11 +233,11 @@ export default async function Home() {
       {talks.length > 0 && (
         <section>
           <SectionHeading>Elsewhere</SectionHeading>
-          <ul className="space-y-4">
+          <Collapsible collapsedCount={3} spacingClass="space-y-4" noun={String(talks.length)}>
             {talks.map((a) => {
               const thumb = youTubeThumb(a.href);
               return (
-                <li key={a.href} className="group flex gap-4">
+                <div key={a.href} className="group flex gap-4">
                   {thumb && (
                     <a
                       href={a.href}
@@ -306,10 +307,10 @@ export default async function Home() {
                       )}
                     </div>
                   </div>
-                </li>
+                </div>
               );
             })}
-          </ul>
+          </Collapsible>
         </section>
       )}
 

@@ -4,7 +4,7 @@ import { join } from "node:path";
 
 // Homepage Open Graph / Twitter card image (1200x630), generated at build/edge.
 export const runtime = "nodejs";
-export const alt = "Pranay Prakash, engineer building developer tools";
+export const alt = "Pranay Prakash. A place for my projects, writing, and more.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -65,15 +65,14 @@ export default async function OG() {
         </div>
         <div
           style={{
-            fontSize: 38,
+            fontSize: 40,
             color: "#a3a3a3",
             marginTop: 32,
             lineHeight: 1.35,
             maxWidth: 950,
           }}
         >
-          Engineer. I build developer tools, most recently the Workflow SDK at
-          Vercel.
+          A place for my projects, writing, and more.
         </div>
         <div
           style={{
