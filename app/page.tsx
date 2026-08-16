@@ -181,44 +181,34 @@ export default async function Home() {
             {projects.map((p, i) => {
               const m = projectMetrics[i];
               return (
-                <div
-                  key={p.name}
-                  className="rounded-lg border border-neutral-800 bg-neutral-900/40 p-5 transition-colors hover:border-neutral-700"
-                >
-                  <div className="flex items-start justify-between gap-4">
+                <div key={p.name}>
+                  <div className="flex items-baseline gap-2">
                     <a
                       href={p.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-lg font-semibold text-neutral-100 hover:text-blue-400 transition-colors"
+                      className="font-medium text-neutral-200 hover:text-blue-400 transition-colors"
                     >
                       {p.name}
                     </a>
-                    <div className="shrink-0 text-right">
-                      <div className="text-xl font-bold text-neutral-100 tabular-nums leading-none">
-                        {m.value}
-                      </div>
-                      {m.label && (
-                        <div className="mt-1 text-[10px] uppercase tracking-wider text-neutral-500">
-                          {m.label}
-                        </div>
-                      )}
-                    </div>
+                    <span className="text-xs text-neutral-500 tabular-nums">
+                      {m.label ? `${m.value} ${m.label}` : m.value}
+                    </span>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-neutral-400 max-w-prose">
+                  <p className="mt-1 text-sm leading-relaxed text-neutral-500 line-clamp-2 max-w-prose">
                     {p.description}
                   </p>
                   {p.links && p.links.length > 0 && (
-                    <div className="mt-3 flex flex-wrap gap-2">
+                    <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
                       {p.links.map((l) => (
                         <a
                           key={l.href}
                           href={l.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="rounded-full border border-neutral-700 px-2.5 py-1 text-xs font-medium text-neutral-300 hover:border-blue-500/50 hover:bg-blue-500/10 hover:text-blue-300 transition-colors"
+                          className="text-xs text-neutral-500 hover:text-neutral-300 transition-colors"
                         >
-                          {l.label}
+                          {l.label} ↗
                         </a>
                       ))}
                     </div>

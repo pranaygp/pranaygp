@@ -22,7 +22,7 @@ export const projects: Project[] = [
     name: "Workflow SDK",
     href: "https://workflow-sdk.dev/",
     description:
-      "A durable execution framework for TypeScript, built at Vercel. Add \"use workflow\" to a function and it becomes a resumable, fault-tolerant workflow — every await is a checkpoint. It compiles plain async/await into durable state machines, so there's no DSL to learn.",
+      "A durable execution framework for TypeScript. Add \"use workflow\" and your async functions become resumable and fault-tolerant — no DSL, just JavaScript.",
     featured: { type: "npm-weekly", pkg: "workflow", label: "weekly npm downloads" },
     links: [
       { label: "Docs", href: "https://workflow-sdk.dev/" },
@@ -33,7 +33,7 @@ export const projects: Project[] = [
     name: "CSS Peek",
     href: "https://marketplace.visualstudio.com/items?itemName=pranaygp.vscode-css-peek",
     description:
-      "A VS Code extension that lets you peek and jump to CSS definitions directly from your HTML classes and IDs — like \"Go to Definition\" for stylesheets. One of the most-installed CSS tools in the marketplace.",
+      "A VS Code extension to peek and jump to CSS definitions from your HTML classes and IDs — \"Go to Definition\" for stylesheets.",
     featured: {
       type: "vscode-installs",
       extensionId: "pranaygp.vscode-css-peek",
