@@ -233,7 +233,7 @@ export default async function Home() {
       {talks.length > 0 && (
         <section>
           <SectionHeading>Elsewhere</SectionHeading>
-          <Collapsible collapsedCount={3} spacingClass="space-y-4" noun={String(talks.length)}>
+          <Collapsible collapsedCount={5} spacingClass="space-y-4" noun={String(talks.length)}>
             {talks.map((a) => {
               const thumb = youTubeThumb(a.href);
               return (

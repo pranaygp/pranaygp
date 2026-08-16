@@ -32,25 +32,27 @@ export default function Collapsible({
       </div>
 
       {hasMore && (
-        <button
-          onClick={() => setExpanded((v) => !v)}
-          className="group mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-neutral-500 hover:text-rose-400 transition-colors"
-          aria-expanded={expanded}
-        >
-          {expanded ? "Show less" : `Show all ${label}`}
-          <svg
-            viewBox="0 0 24 24"
-            className={`h-3.5 w-3.5 transition-transform duration-200 ${
-              expanded ? "rotate-180" : ""
-            }`}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2.2}
-            aria-hidden
+        <div className="mt-4 flex justify-center">
+          <button
+            onClick={() => setExpanded((v) => !v)}
+            className="group inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/50 px-5 py-2.5 text-sm font-medium text-neutral-300 hover:border-rose-500/40 hover:bg-rose-500/10 hover:text-rose-300 transition-colors"
+            aria-expanded={expanded}
           >
-            <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
+            {expanded ? "Show less" : `Show all ${label}`}
+            <svg
+              viewBox="0 0 24 24"
+              className={`h-4 w-4 transition-transform duration-200 ${
+                expanded ? "rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2.2}
+              aria-hidden
+            >
+              <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
       )}
     </div>
   );

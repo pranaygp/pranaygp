@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import Collapsible from "@/components/Collapsible";
 
 export interface ProjectView {
   name: string;
@@ -10,9 +8,6 @@ export interface ProjectView {
   metricLabel: string;
   links?: { label: string; href: string }[];
 }
-
-// How many projects to show before "Show all".
-const COLLAPSED_COUNT = 3;
 
 function ProjectRow({ p }: { p: ProjectView }) {
   return (
@@ -63,45 +58,11 @@ function ProjectRow({ p }: { p: ProjectView }) {
 }
 
 export default function ProjectList({ projects }: { projects: ProjectView[] }) {
-  const [expanded, setExpanded] = useState(false);
-  const hasMore = projects.length > COLLAPSED_COUNT;
-  const visible = expanded ? projects : projects.slice(0, COLLAPSED_COUNT);
-
   return (
-    <div>
-      <div className="relative">
-        <div className="space-y-5">
-          {visible.map((p) => (
-            <ProjectRow key={p.name} p={p} />
-          ))}
-        </div>
-        {/* Fade-out gradient hint when collapsed */}
-        {hasMore && !expanded && (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-[#0a0a0a]" />
-        )}
-      </div>
-
-      {hasMore && (
-        <button
-          onClick={() => setExpanded((v) => !v)}
-          className="group mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-neutral-500 hover:text-rose-400 transition-colors"
-          aria-expanded={expanded}
-        >
-          {expanded ? "Show less" : `Show all ${projects.length}`}
-          <svg
-            viewBox="0 0 24 24"
-            className={`h-3.5 w-3.5 transition-transform duration-200 ${
-              expanded ? "rotate-180" : ""
-            }`}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2.2}
-            aria-hidden
-          >
-            <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-      )}
-    </div>
+    <Collapsible collapsedCount={3} spacingClass="space-y-5">
+      {projects.map((p) => (
+        <ProjectRow key={p.name} p={p} />
+      ))}
+    </Collapsible>
   );
 }
