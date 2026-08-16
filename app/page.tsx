@@ -136,6 +136,7 @@ export default async function Home() {
     description: p.description,
     metricValue: projectMetrics[i].value,
     metricLabel: projectMetrics[i].label,
+    archived: p.archived,
     links: p.links,
   }));
   const talks = [...appearances].sort((a, b) => (a.date > b.date ? -1 : 1));

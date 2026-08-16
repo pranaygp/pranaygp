@@ -6,6 +6,7 @@ export interface ProjectView {
   description: string;
   metricValue: string;
   metricLabel: string;
+  archived?: boolean;
   links?: { label: string; href: string }[];
 }
 
@@ -13,17 +14,24 @@ function ProjectRow({ p }: { p: ProjectView }) {
   return (
     <div>
       <div className="flex items-baseline justify-between gap-3">
-        <a
-          href={p.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group/name font-medium text-neutral-100 hover:text-rose-400 transition-colors"
-        >
-          {p.name}
-          <span className="ml-1 text-neutral-600 transition-colors group-hover/name:text-rose-400">
-            ↗
-          </span>
-        </a>
+        <div className="flex items-baseline gap-2 min-w-0">
+          <a
+            href={p.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/name font-medium text-neutral-100 hover:text-rose-400 transition-colors"
+          >
+            {p.name}
+            <span className="ml-1 text-neutral-600 transition-colors group-hover/name:text-rose-400">
+              {"\u2197\uFE0E"}
+            </span>
+          </a>
+          {p.archived && (
+            <span className="shrink-0 rounded-full border border-neutral-800 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-neutral-500">
+              Archived
+            </span>
+          )}
+        </div>
         <span className="shrink-0 text-xs text-neutral-500 tabular-nums text-right">
           {p.metricLabel ? (
             <>

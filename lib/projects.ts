@@ -13,6 +13,7 @@ export interface Project {
   href: string;
   description: string;
   featured: FeaturedMetric;
+  archived?: boolean;
   // optional secondary links (source, docs)
   links?: { label: string; href: string }[];
 }
@@ -70,6 +71,7 @@ export const projects: Project[] = [
     description:
       "An MDX Deck layout that turns code blocks on a slide into a live, runnable RunKit playground.",
     featured: { type: "github-stars", repo: "pranaygp/mdx-code", label: "GitHub stars" },
+    archived: true,
     links: [{ label: "GitHub", href: "https://github.com/pranaygp/mdx-code" }],
   },
   {
