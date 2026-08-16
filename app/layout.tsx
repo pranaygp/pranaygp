@@ -8,11 +8,23 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://pranay.gp"),
   title: {
     default: "pranay.gp",
     template: "%s — pranay.gp",
   },
   description: "Pranay Prakash's blog",
+  openGraph: {
+    title: "Pranay Prakash",
+    description: "Engineer. Writing, work, and links.",
+    url: "https://pranay.gp",
+    siteName: "pranay.gp",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@pranaygp",
+  },
 };
 
 export default function RootLayout({
