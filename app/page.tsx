@@ -182,33 +182,43 @@ export default async function Home() {
               const m = projectMetrics[i];
               return (
                 <div key={p.name}>
-                  <div className="flex items-baseline gap-2">
+                  <div className="flex items-baseline justify-between gap-3">
                     <a
                       href={p.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-medium text-neutral-200 hover:text-blue-400 transition-colors"
+                      className="group/name font-medium text-blue-400 hover:text-blue-300 transition-colors"
                     >
                       {p.name}
+                      <span className="ml-1 text-neutral-600 transition-colors group-hover/name:text-blue-300">
+                        ↗
+                      </span>
                     </a>
-                    <span className="text-xs text-neutral-500 tabular-nums">
-                      {m.label ? `${m.value} ${m.label}` : m.value}
+                    <span className="shrink-0 text-xs text-neutral-500 tabular-nums text-right">
+                      {m.label ? (
+                        <>
+                          <span className="text-neutral-300">{m.value}</span>{" "}
+                          {m.label}
+                        </>
+                      ) : (
+                        m.value
+                      )}
                     </span>
                   </div>
                   <p className="mt-1 text-sm leading-relaxed text-neutral-500 line-clamp-2 max-w-prose">
                     {p.description}
                   </p>
                   {p.links && p.links.length > 0 && (
-                    <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
+                    <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1">
                       {p.links.map((l) => (
                         <a
                           key={l.href}
                           href={l.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs text-neutral-500 hover:text-neutral-300 transition-colors"
+                          className="text-xs text-neutral-500 underline underline-offset-4 decoration-neutral-700 hover:text-neutral-200 hover:decoration-neutral-500 transition-colors"
                         >
-                          {l.label} ↗
+                          {l.label}
                         </a>
                       ))}
                     </div>

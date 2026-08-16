@@ -47,7 +47,11 @@ export const projects: Project[] = [
     name: "Qiuling",
     href: "https://qiuling.pranay.gp",
     description:
-      "A personal writing script and font of my own design, inspired by Latin, Arabic, and Korean. A tinker project I actually use — I write and journal in it.",
-    featured: { type: "static", value: "A personal font & script" },
+      "A personal writing script and font of my own design, inspired by Latin, Arabic, and Korean. A tinker project I write and journal in.",
+    featured: { type: "static", value: "Personal project" },
+    links: [
+      // TODO(pranay): confirm the real repo URL for Qiuling.
+      { label: "GitHub", href: "https://github.com/pranaygp/qiuling" },
+    ],
   },
 ];
