@@ -75,7 +75,7 @@ export function middleware(req: NextRequest) {
       return redirect("https://www.linkedin.com/in/pranaygp");
     case "avatar":
       url.host = "avatar-teal-seven.vercel.app";
-      return rewrite(url);
+      return NextResponse.rewrite(url);
     default:
       // For localhost or unknown subdomains, serve the app
       if (
