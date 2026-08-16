@@ -26,6 +26,43 @@ function SpotifyIcon({ className }: { className?: string }) {
   );
 }
 
+function YouTubeIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z" />
+    </svg>
+  );
+}
+
+// Small brand-styled pill linking out to a platform.
+function PlatformPill({
+  href,
+  icon,
+  label,
+  brand,
+}: {
+  href: string;
+  icon: React.ReactNode;
+  label: string;
+  brand: "youtube" | "spotify";
+}) {
+  const brandClasses =
+    brand === "youtube"
+      ? "hover:border-[#FF0000]/60 hover:text-[#FF4545] hover:bg-[#FF0000]/10"
+      : "hover:border-[#1DB954]/60 hover:text-[#1DB954] hover:bg-[#1DB954]/10";
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex items-center gap-1.5 rounded-full border border-neutral-700 px-2.5 py-1 text-xs font-medium text-neutral-300 transition-colors ${brandClasses}`}
+    >
+      {icon}
+      {label}
+    </a>
+  );
+}
+
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="text-xs font-medium uppercase tracking-widest text-neutral-500 mb-4">
@@ -187,20 +224,25 @@ export default function Home() {
                     >
                       {a.title}
                     </a>
-                    <div className="mt-1 flex items-center gap-3">
+                    {a.note && (
+                      <span className="mt-0.5 block text-xs text-neutral-600">
+                        {a.note}
+                      </span>
+                    )}
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
+                      <PlatformPill
+                        href={a.href}
+                        brand="youtube"
+                        label="YouTube"
+                        icon={<YouTubeIcon className="h-3.5 w-3.5" />}
+                      />
                       {a.spotify && (
-                        <a
+                        <PlatformPill
                           href={a.spotify}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-xs text-neutral-500 hover:text-[#1DB954] transition-colors"
-                        >
-                          <SpotifyIcon className="h-3.5 w-3.5" />
-                          Spotify
-                        </a>
-                      )}
-                      {a.note && (
-                        <span className="text-xs text-neutral-600">{a.note}</span>
+                          brand="spotify"
+                          label="Spotify"
+                          icon={<SpotifyIcon className="h-3.5 w-3.5" />}
+                        />
                       )}
                     </div>
                   </div>
