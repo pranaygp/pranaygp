@@ -42,7 +42,7 @@ export default async function OG({
             left: 0,
             right: 0,
             height: 8,
-            background: "linear-gradient(90deg,#3b82f6,#8b5cf6)",
+            background: "linear-gradient(90deg,#fb7185,#f43f5e)",
           }}
         />
         <div style={{ display: "flex", fontSize: 28, color: "#737373" }}>
@@ -69,7 +69,7 @@ export default async function OG({
             color: "#a3a3a3",
           }}
         >
-          <span style={{ color: "#3b82f6" }}>pranay.gp</span>
+          <span style={{ color: "#fb7185" }}>pranay.gp</span>
           <span>
             {date}
             {kudos > 0 ? `   ♥ ${kudos.toLocaleString()}` : ""}

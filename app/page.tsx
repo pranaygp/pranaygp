@@ -107,7 +107,7 @@ function InlineLinks({
         <li key={l.href}>
           <a
             href={l.href}
-            className="text-neutral-300 hover:text-blue-400 underline underline-offset-4 decoration-neutral-700 hover:decoration-blue-400/50 transition-colors"
+            className="text-neutral-300 hover:text-rose-400 underline underline-offset-4 decoration-neutral-700 hover:decoration-rose-400/50 transition-colors"
           >
             {l.label}
           </a>
@@ -147,7 +147,7 @@ export default async function Home() {
           Engineer. I build developer tools, most recently the{" "}
           <a
             href="https://useworkflow.dev"
-            className="text-blue-400 hover:text-blue-300 underline underline-offset-2 decoration-blue-400/30"
+            className="text-rose-400 hover:text-rose-300 underline underline-offset-2 decoration-rose-400/30"
           >
             Workflow SDK
           </a>{" "}
@@ -187,10 +187,10 @@ export default async function Home() {
                       href={p.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group/name font-medium text-blue-400 hover:text-blue-300 transition-colors"
+                      className="group/name font-medium text-rose-400 hover:text-rose-300 transition-colors"
                     >
                       {p.name}
-                      <span className="ml-1 text-neutral-600 transition-colors group-hover/name:text-blue-300">
+                      <span className="ml-1 text-neutral-600 transition-colors group-hover/name:text-rose-300">
                         ↗
                       </span>
                     </a>
@@ -246,7 +246,7 @@ export default async function Home() {
                   <time className="text-sm text-neutral-600 tabular-nums shrink-0 w-24">
                     {post.date}
                   </time>
-                  <span className="flex-1 text-neutral-200 group-hover:text-blue-400 transition-colors">
+                  <span className="flex-1 text-neutral-200 group-hover:text-rose-400 transition-colors">
                     {post.title}
                   </span>
                   {post.draft && (
@@ -316,7 +316,7 @@ export default async function Home() {
                       href={a.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-0.5 block text-neutral-200 leading-snug group-hover:text-blue-400 transition-colors"
+                      className="mt-0.5 block text-neutral-200 leading-snug group-hover:text-rose-400 transition-colors"
                     >
                       {a.title}
                     </a>

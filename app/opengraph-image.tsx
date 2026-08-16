@@ -38,7 +38,7 @@ export default async function OG() {
             left: 0,
             right: 0,
             height: 8,
-            background: "linear-gradient(90deg,#3b82f6,#8b5cf6)",
+            background: "linear-gradient(90deg,#fb7185,#f43f5e)",
           }}
         />
         <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
@@ -84,7 +84,7 @@ export default async function OG() {
             color: "#525252",
           }}
         >
-          <span style={{ color: "#3b82f6" }}>pranay.gp</span>
+          <span style={{ color: "#fb7185" }}>pranay.gp</span>
           <span>·</span>
           <span>Writing · Projects · Talks</span>
         </div>

@@ -23,7 +23,7 @@ const config: Config = {
             "--tw-prose-body": "#d4d4d4",
             "--tw-prose-headings": "#f5f5f5",
             "--tw-prose-lead": "#a3a3a3",
-            "--tw-prose-links": "#60a5fa",
+            "--tw-prose-links": "#fb7185",
             "--tw-prose-bold": "#f5f5f5",
             "--tw-prose-counters": "#a3a3a3",
             "--tw-prose-bullets": "#525252",

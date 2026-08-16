@@ -32,7 +32,7 @@ function InlineLinks({
         <li key={l.href + l.label}>
           <a
             href={l.href}
-            className="text-neutral-300 hover:text-blue-400 underline underline-offset-4 decoration-neutral-700 hover:decoration-blue-400/50 transition-colors"
+            className="text-neutral-300 hover:text-rose-400 underline underline-offset-4 decoration-neutral-700 hover:decoration-rose-400/50 transition-colors"
           >
             {l.label}
           </a>
