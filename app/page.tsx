@@ -11,6 +11,7 @@ export const metadata = {
 const kindLabel: Record<string, string> = {
   podcast: "Podcast",
   talk: "Talk",
+  keynote: "Keynote",
   video: "Video",
   article: "Article",
   interview: "Interview",
@@ -50,6 +51,7 @@ function InlineLinks({
 
 export default function Home() {
   const posts = getVisiblePosts().slice(0, 5);
+  const talks = [...appearances].sort((a, b) => (a.date > b.date ? -1 : 1));
 
   return (
     <main className="space-y-16">
@@ -111,25 +113,31 @@ export default function Home() {
       </section>
 
       {/* Appearances */}
-      {appearances.length > 0 && (
+      {talks.length > 0 && (
         <section>
           <SectionHeading>Elsewhere</SectionHeading>
           <ul className="space-y-3">
-            {appearances.map((a) => (
+            {talks.map((a) => (
               <li key={a.href} className="flex items-baseline gap-3">
-                <span className="text-[10px] text-neutral-600 font-medium uppercase tracking-wider shrink-0 w-24">
-                  {kindLabel[a.kind] ?? a.kind}
-                </span>
-                <span>
+                <time className="text-sm text-neutral-600 tabular-nums shrink-0 w-12">
+                  {a.date.slice(0, 4)}
+                </time>
+                <span className="min-w-0">
                   <a
                     href={a.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-neutral-200 hover:text-blue-400 transition-colors"
                   >
                     {a.title}
                   </a>
-                  {(a.outlet || a.date) && (
-                    <span className="text-neutral-600 text-sm ml-2">
-                      {[a.outlet, a.date].filter(Boolean).join(" · ")}
+                  <span className="text-neutral-600 text-sm ml-2">
+                    {kindLabel[a.kind] ?? a.kind}
+                    {a.outlet ? ` · ${a.outlet}` : ""}
+                  </span>
+                  {a.note && (
+                    <span className="block text-neutral-600 text-xs mt-0.5">
+                      {a.note}
                     </span>
                   )}
                 </span>
