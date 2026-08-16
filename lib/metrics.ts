@@ -54,6 +54,23 @@ export async function getNpmWeekly(pkg: string): Promise<number | null> {
   }
 }
 
+// GitHub stargazers for a repo (e.g. "pranaygp/mdx-code").
+export async function getGithubStars(repo: string): Promise<number | null> {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${repo}`, {
+      headers: { Accept: "application/vnd.github+json" },
+      next: { revalidate: HOUR },
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return typeof data?.stargazers_count === "number"
+      ? data.stargazers_count
+      : null;
+  } catch {
+    return null;
+  }
+}
+
 // Compact human number: 7924821 -> "7.9M", 896539 -> "897K".
 export function compactNumber(n: number): string {
   if (n >= 1_000_000) {

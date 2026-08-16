@@ -5,7 +5,7 @@ import { getAllKudos } from "@/lib/kudos";
 import { socials, contact, tools } from "@/lib/links";
 import { appearances, youTubeThumb } from "@/lib/appearances";
 import { projects, type Project } from "@/lib/projects";
-import { getVscodeInstalls, getNpmWeekly, compactNumber } from "@/lib/metrics";
+import { getVscodeInstalls, getNpmWeekly, getGithubStars, compactNumber } from "@/lib/metrics";
 import KudosBadge from "@/components/KudosBadge";
 import { socialIcon } from "@/components/SocialIcons";
 
@@ -25,6 +25,10 @@ async function resolveMetric(
   if (f.type === "npm-weekly") {
     const n = await getNpmWeekly(f.pkg);
     return { value: n ? compactNumber(n) : "-", label: f.label };
+  }
+  if (f.type === "github-stars") {
+    const n = await getGithubStars(f.repo);
+    return { value: n != null ? compactNumber(n) : "-", label: f.label };
   }
   return { value: "", label: "" };
 }
@@ -187,10 +191,10 @@ export default async function Home() {
                       href={p.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group/name font-medium text-rose-400 hover:text-rose-300 transition-colors"
+                      className="group/name font-medium text-neutral-100 hover:text-rose-400 transition-colors"
                     >
                       {p.name}
-                      <span className="ml-1 text-neutral-600 transition-colors group-hover/name:text-rose-300">
+                      <span className="ml-1 text-neutral-600 transition-colors group-hover/name:text-rose-400">
                         ↗
                       </span>
                     </a>
