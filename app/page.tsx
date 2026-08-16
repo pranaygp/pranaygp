@@ -20,18 +20,18 @@ async function resolveMetric(
   if (f.type === "static") return { value: f.value, label: "" };
   if (f.type === "vscode-installs") {
     const n = await getVscodeInstalls(f.extensionId);
-    return { value: n ? compactNumber(n) : "—", label: f.label };
+    return { value: n ? compactNumber(n) : "-", label: f.label };
   }
   if (f.type === "npm-weekly") {
     const n = await getNpmWeekly(f.pkg);
-    return { value: n ? compactNumber(n) : "—", label: f.label };
+    return { value: n ? compactNumber(n) : "-", label: f.label };
   }
   return { value: "", label: "" };
 }
 
 export const metadata = {
   title: "Pranay Prakash",
-  description: "Pranay Prakash — engineer. Writing, work, and links.",
+  description: "Pranay Prakash. Engineer. Writing, work, and links.",
 };
 
 const kindLabel: Record<string, string> = {
@@ -144,7 +144,7 @@ export default async function Home() {
           </h1>
         </div>
         <p className="text-neutral-400 mt-4 leading-relaxed max-w-prose">
-          Engineer. I build developer tools — most recently the{" "}
+          Engineer. I build developer tools, most recently the{" "}
           <a
             href="https://useworkflow.dev"
             className="text-blue-400 hover:text-blue-300 underline underline-offset-2 decoration-blue-400/30"
@@ -155,7 +155,7 @@ export default async function Home() {
           made, and the places you can find me.
         </p>
 
-        {/* Social links — icon row, top of the page */}
+        {/* Social links: icon row, top of the page */}
         <nav className="mt-5 flex flex-wrap items-center gap-2.5">
           {socials.map((l) => (
             <a

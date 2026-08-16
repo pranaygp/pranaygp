@@ -8,5 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       disallow: ["/private", "/private/"],
     },
     host: "https://pranay.gp",
+    sitemap: "https://pranay.gp/sitemap.xml",
   };
 }

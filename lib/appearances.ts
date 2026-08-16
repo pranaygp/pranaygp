@@ -1,5 +1,5 @@
 // Podcasts, talks, keynotes, and other places I show up.
-// Sorted for display by date (newest first) in app/page.tsx — you can add
+// Sorted for display by date (newest first) in app/page.tsx. You can add
 // entries here in any order. `kind` drives the little label shown next to each.
 
 export type AppearanceKind =
@@ -22,6 +22,27 @@ export interface Appearance {
 
 export const appearances: Appearance[] = [
   {
+    title: "A deep dive into hooks | Workflow SDK",
+    href: "https://www.youtube.com/watch?v=zsxelWLj_m0",
+    outlet: "Vercel",
+    date: "2026-05-07",
+    kind: "video",
+  },
+  {
+    title: "Introducing Vercel Workflows",
+    href: "https://www.youtube.com/watch?v=C9ahOihLPVA",
+    outlet: "Vercel",
+    date: "2026-04-16",
+    kind: "talk",
+  },
+  {
+    title: "Presenting Windsor to Erik Torenberg",
+    href: "https://www.youtube.com/watch?v=O2NZlyXECEg",
+    outlet: "Pioneer",
+    date: "2021-11-29",
+    kind: "interview",
+  },
+  {
     title: "If you can ship anything, you shouldn't ship everything",
     href: "https://www.youtube.com/watch?v=qSwGy-jK-yA",
     outlet: "Augment Code",
@@ -30,12 +51,12 @@ export const appearances: Appearance[] = [
     spotify: "https://open.spotify.com/episode/6cYMYF2qWxC3nGrpq3DbKO",
   },
   {
-    title: "Vercel Ship AI '25 — Opening Keynote",
+    title: "Vercel Ship AI '25: Opening Keynote",
     href: "https://www.youtube.com/watch?v=mZzAuFq5C6Q&t=1954s",
     outlet: "Vercel",
     date: "2025-10-24",
     kind: "keynote",
-    note: "My segment: 32:34–39:36",
+    note: "My segment: 32:34 to 39:36",
   },
   {
     title: "Building and selling a startup in the current market",
@@ -45,7 +66,7 @@ export const appearances: Appearance[] = [
     kind: "interview",
   },
   {
-    title: "Deepfakes — a talk about tech, ethics, and business",
+    title: "Deepfakes: a talk about tech, ethics, and business",
     href: "https://www.youtube.com/watch?v=5NAFTdE2crY",
     outlet: "Techsylvania",
     date: "2024-08-11",

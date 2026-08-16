@@ -53,7 +53,7 @@ export default function PrivateDashboard() {
           Private
         </h1>
         <p className="text-neutral-500 mt-2 text-sm max-w-prose">
-          My personal jump list — every link and tool in one place. Not linked
+          My personal jump list: every link and tool in one place. Not linked
           from anywhere public and blocked from search engines.
         </p>
       </header>

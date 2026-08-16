@@ -16,9 +16,28 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post) return { title: "Not Found" };
+  const url = `https://pranay.gp/blog/${slug}`;
+  const description = post.excerpt || `${post.title}. An essay by Pranay Prakash.`;
   return {
     title: post.title,
-    description: post.excerpt,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: post.title,
+      description,
+      url,
+      siteName: "pranay.gp",
+      type: "article",
+      publishedTime: post.date || undefined,
+      authors: ["Pranay Prakash"],
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description,
+      creator: "@pranaygp",
+    },
   };
 }
 

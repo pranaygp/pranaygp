@@ -84,10 +84,10 @@ export default function KudosButton({
     <button
       onClick={give}
       disabled={maxedOut}
-      aria-label={maxedOut ? "Kudos maxed out — thank you!" : "Give kudos"}
+      aria-label={maxedOut ? "Kudos maxed out, thank you!" : "Give kudos"}
       title={
         maxedOut
-          ? "You've given the max kudos — thank you!"
+          ? "You've given the max kudos, thank you!"
           : "Give kudos"
       }
       className={`group inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm transition-colors ${
