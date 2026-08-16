@@ -8,6 +8,7 @@ import { projects, type Project } from "@/lib/projects";
 import { getVscodeInstalls, getNpmWeekly, getGithubStars, compactNumber } from "@/lib/metrics";
 import KudosBadge from "@/components/KudosBadge";
 import { socialIcon } from "@/components/SocialIcons";
+import ProjectList, { type ProjectView } from "@/components/ProjectList";
 
 // Live kudos + project metrics come from external sources, so render dynamically.
 export const dynamic = "force-dynamic";
@@ -128,6 +129,14 @@ export default async function Home() {
   const posts = getVisiblePosts();
   const kudos = await getAllKudos();
   const projectMetrics = await Promise.all(projects.map(resolveMetric));
+  const projectViews: ProjectView[] = projects.map((p, i) => ({
+    name: p.name,
+    href: p.href,
+    description: p.description,
+    metricValue: projectMetrics[i].value,
+    metricLabel: projectMetrics[i].label,
+    links: p.links,
+  }));
   const talks = [...appearances].sort((a, b) => (a.date > b.date ? -1 : 1));
 
   return (
@@ -178,59 +187,10 @@ export default async function Home() {
       </header>
 
       {/* Projects */}
-      {projects.length > 0 && (
+      {projectViews.length > 0 && (
         <section>
           <SectionHeading>Projects</SectionHeading>
-          <div className="space-y-5">
-            {projects.map((p, i) => {
-              const m = projectMetrics[i];
-              return (
-                <div key={p.name}>
-                  <div className="flex items-baseline justify-between gap-3">
-                    <a
-                      href={p.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group/name font-medium text-neutral-100 hover:text-rose-400 transition-colors"
-                    >
-                      {p.name}
-                      <span className="ml-1 text-neutral-600 transition-colors group-hover/name:text-rose-400">
-                        ↗
-                      </span>
-                    </a>
-                    <span className="shrink-0 text-xs text-neutral-500 tabular-nums text-right">
-                      {m.label ? (
-                        <>
-                          <span className="text-neutral-300">{m.value}</span>{" "}
-                          {m.label}
-                        </>
-                      ) : (
-                        m.value
-                      )}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-sm leading-relaxed text-neutral-500 line-clamp-2 max-w-prose">
-                    {p.description}
-                  </p>
-                  {p.links && p.links.length > 0 && (
-                    <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1">
-                      {p.links.map((l) => (
-                        <a
-                          key={l.href}
-                          href={l.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs text-neutral-500 underline underline-offset-4 decoration-neutral-700 hover:text-neutral-200 hover:decoration-neutral-500 transition-colors"
-                        >
-                          {l.label}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          <ProjectList projects={projectViews} />
         </section>
       )}
 
