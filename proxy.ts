@@ -20,7 +20,7 @@ const hidden: Record<string, string> = {
   qiuling: "The Qiuling Font",
 };
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   console.log("URL requested", req.url);
 
   const url = new URL(req.url);

@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Fail the production build on type or lint errors instead of shipping them.
+  // Fail the production build on type errors instead of shipping them.
   typescript: { ignoreBuildErrors: false },
-  eslint: { ignoreDuringBuilds: false },
 
   // Statically typed Link hrefs (stable in Next 16) — catches broken internal links at build time.
   typedRoutes: true,

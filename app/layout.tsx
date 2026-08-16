@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
+
+// Google Analytics measurement/tracking ID.
+// NOTE: "UA-142839226-2" is a Universal Analytics ID; Google stopped
+// collecting UA data on 2024-07-01, so create a GA4 property ("G-XXXX")
+// and set NEXT_PUBLIC_GA_ID in the Vercel env to start collecting again.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "UA-142839226-2";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://pranay.gp"),
@@ -39,6 +46,7 @@ export default function RootLayout({
           {children}
         </div>
       </body>
+      <GoogleAnalytics gaId={GA_ID} />
     </html>
   );
 }
