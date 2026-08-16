@@ -1,7 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getVisiblePosts } from "@/lib/posts";
 import { socials, contact, tools } from "@/lib/links";
-import { appearances } from "@/lib/appearances";
+import { appearances, youTubeThumb } from "@/lib/appearances";
 
 export const metadata = {
   title: "Pranay Prakash",
@@ -16,6 +17,14 @@ const kindLabel: Record<string, string> = {
   article: "Article",
   interview: "Interview",
 };
+
+function SpotifyIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.5 17.3a.75.75 0 0 1-1.03.25c-2.82-1.72-6.37-2.11-10.55-1.16a.75.75 0 1 1-.33-1.46c4.57-1.04 8.5-.59 11.66 1.34.35.22.46.68.25 1.03zm1.47-3.27a.94.94 0 0 1-1.29.31c-3.23-1.98-8.15-2.56-11.97-1.4a.94.94 0 1 1-.54-1.8c4.37-1.32 9.8-.68 13.5 1.6.44.27.58.85.3 1.29zm.13-3.4C15.24 8.4 8.82 8.2 5.1 9.33a1.12 1.12 0 1 1-.65-2.15c4.27-1.3 11.36-1.05 15.85 1.61a1.12 1.12 0 1 1-1.15 1.93z" />
+    </svg>
+  );
+}
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -116,33 +125,78 @@ export default function Home() {
       {talks.length > 0 && (
         <section>
           <SectionHeading>Elsewhere</SectionHeading>
-          <ul className="space-y-3">
-            {talks.map((a) => (
-              <li key={a.href} className="flex items-baseline gap-3">
-                <time className="text-sm text-neutral-600 tabular-nums shrink-0 w-12">
-                  {a.date.slice(0, 4)}
-                </time>
-                <span className="min-w-0">
-                  <a
-                    href={a.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-200 hover:text-blue-400 transition-colors"
-                  >
-                    {a.title}
-                  </a>
-                  <span className="text-neutral-600 text-sm ml-2">
-                    {kindLabel[a.kind] ?? a.kind}
-                    {a.outlet ? ` · ${a.outlet}` : ""}
-                  </span>
-                  {a.note && (
-                    <span className="block text-neutral-600 text-xs mt-0.5">
-                      {a.note}
-                    </span>
+          <ul className="space-y-4">
+            {talks.map((a) => {
+              const thumb = youTubeThumb(a.href);
+              return (
+                <li key={a.href} className="group flex gap-4">
+                  {thumb && (
+                    <a
+                      href={a.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative shrink-0 overflow-hidden rounded-md border border-neutral-800 w-28 sm:w-32 aspect-video bg-neutral-900"
+                      aria-label={a.title}
+                    >
+                      <Image
+                        src={thumb}
+                        alt=""
+                        fill
+                        sizes="128px"
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      {/* play glyph */}
+                      <span className="absolute inset-0 flex items-center justify-center">
+                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black/55 backdrop-blur-sm transition-colors group-hover:bg-black/70">
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="h-3.5 w-3.5 translate-x-[1px] fill-white"
+                            aria-hidden
+                          >
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </span>
+                      </span>
+                    </a>
                   )}
-                </span>
-              </li>
-            ))}
+                  <div className="min-w-0 flex-1 py-0.5">
+                    <div className="flex items-baseline gap-2">
+                      <time className="text-xs text-neutral-600 tabular-nums shrink-0">
+                        {a.date.slice(0, 4)}
+                      </time>
+                      <span className="text-[10px] text-neutral-500 font-medium uppercase tracking-wider">
+                        {kindLabel[a.kind] ?? a.kind}
+                        {a.outlet ? ` · ${a.outlet}` : ""}
+                      </span>
+                    </div>
+                    <a
+                      href={a.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-0.5 block text-neutral-200 leading-snug group-hover:text-blue-400 transition-colors"
+                    >
+                      {a.title}
+                    </a>
+                    <div className="mt-1 flex items-center gap-3">
+                      {a.spotify && (
+                        <a
+                          href={a.spotify}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs text-neutral-500 hover:text-[#1DB954] transition-colors"
+                        >
+                          <SpotifyIcon className="h-3.5 w-3.5" />
+                          Spotify
+                        </a>
+                      )}
+                      {a.note && (
+                        <span className="text-xs text-neutral-600">{a.note}</span>
+                      )}
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </section>
       )}

@@ -6,6 +6,14 @@ const nextConfig = {
   // Statically typed Link hrefs (stable in Next 16) — catches broken internal links at build time.
   typedRoutes: true,
 
+  // Allow YouTube thumbnail images through next/image optimization.
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "img.youtube.com" },
+      { protocol: "https", hostname: "i.ytimg.com" },
+    ],
+  },
+
   // Strip the X-Powered-By header and enable gzip.
   poweredByHeader: false,
   compress: true,

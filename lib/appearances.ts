@@ -17,6 +17,7 @@ export interface Appearance {
   date: string; // YYYY-MM-DD (used for sorting; rendered as the year)
   kind: AppearanceKind;
   note?: string; // optional extra context (e.g. "My segment: 32:34–39:36")
+  spotify?: string; // optional Spotify episode link (alternate to the YouTube href)
 }
 
 export const appearances: Appearance[] = [
@@ -26,6 +27,7 @@ export const appearances: Appearance[] = [
     outlet: "Augment Code",
     date: "2026-06-11",
     kind: "podcast",
+    spotify: "https://open.spotify.com/episode/6cYMYF2qWxC3nGrpq3DbKO",
   },
   {
     title: "Vercel Ship AI '25 — Opening Keynote",
@@ -69,6 +71,7 @@ export const appearances: Appearance[] = [
     outlet: "The Lean Hire Podcast",
     date: "2020-09-22",
     kind: "podcast",
+    spotify: "https://open.spotify.com/episode/57HquRkWy36WF3HnhRnSMO",
   },
   {
     title: "Presenting Windsor to Patrick McKenzie",
@@ -84,4 +87,23 @@ export const appearances: Appearance[] = [
     date: "2018-11-07",
     kind: "talk",
   },
+  {
+    title: "Optimizing your code with Babel",
+    href: "https://www.youtube.com/watch?v=XvTsxa9i13o",
+    outlet: "Vercel",
+    date: "2018-05-28",
+    kind: "talk",
+  },
 ];
+
+// Extract the YouTube video ID from a watch URL (for thumbnails).
+export function youTubeId(url: string): string | null {
+  const m = url.match(/[?&]v=([A-Za-z0-9_-]{6,})/);
+  return m ? m[1] : null;
+}
+
+// mqdefault (320×180) is a good balance of crisp + light for small thumbs.
+export function youTubeThumb(url: string): string | null {
+  const id = youTubeId(url);
+  return id ? `https://img.youtube.com/vi/${id}/mqdefault.jpg` : null;
+}

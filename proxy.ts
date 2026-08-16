@@ -3,9 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 const descriptions: Record<string, string> = {
   www: "Blog",
   pgp: "PGP Key",
-  call: "Video Call Room",
-  calendar: "Calendar",
-  email: "Email",
   x: "X/Twitter",
   github: "GitHub",
   ig: "Instagram",
@@ -67,6 +64,17 @@ export function proxy(req: NextRequest) {
     }
     case "pranay": // if there's no subdomain, it'll show up as "pranay"
     case "www": {
+      // The /private dashboard is gated behind HTTP Basic Auth so only I can
+      // reach my email / calendar / video-room / tools links. It is never
+      // served publicly and is excluded from crawlers via robots.txt + noindex.
+      if (
+        url.pathname === "/private" ||
+        url.pathname.startsWith("/private/")
+      ) {
+        const unauthorized = requireBasicAuth(req);
+        if (unauthorized) return unauthorized;
+        return NextResponse.next();
+      }
       // Serve the Next.js blog for the main domain, BUT first honor the old
       // flat post URLs (pranay.gp/<slug>) by redirecting them to /blog/<slug>.
       const seg = url.pathname.replace(/^\/+|\/+$/g, "");
@@ -110,6 +118,14 @@ export function proxy(req: NextRequest) {
         url.hostname === "127.0.0.1" ||
         url.host.includes("vercel.app")
       ) {
+        // Keep /private gated even on preview/localhost hosts.
+        if (
+          url.pathname === "/private" ||
+          url.pathname.startsWith("/private/")
+        ) {
+          const unauthorized = requireBasicAuth(req);
+          if (unauthorized) return unauthorized;
+        }
         return NextResponse.next();
       }
       return list();
@@ -130,6 +146,41 @@ function redirect(url: string, status: number = 308) {
     status,
     headers: {
       Location: url,
+    },
+  });
+}
+
+// HTTP Basic Auth gate for the private dashboard. Returns a 401 Response when
+// credentials are missing/incorrect, or null when the request is authorized.
+// Credentials come from env vars so they never live in the repo:
+//   PRIVATE_USER (default "pranay") and PRIVATE_PASS (required).
+function requireBasicAuth(req: NextRequest): Response | null {
+  const expectedUser = process.env.PRIVATE_USER || "pranay";
+  const expectedPass = process.env.PRIVATE_PASS || "";
+
+  // If no password is configured, fail closed (deny everyone) rather than
+  // accidentally exposing the dashboard.
+  const header = req.headers.get("authorization") || "";
+  if (expectedPass && header.startsWith("Basic ")) {
+    try {
+      const decoded = atob(header.slice(6));
+      const idx = decoded.indexOf(":");
+      const user = decoded.slice(0, idx);
+      const pass = decoded.slice(idx + 1);
+      if (user === expectedUser && pass === expectedPass) {
+        return null; // authorized
+      }
+    } catch {
+      // fall through to 401
+    }
+  }
+
+  return new Response("Authentication required.", {
+    status: 401,
+    headers: {
+      "WWW-Authenticate": 'Basic realm="pranay.gp private", charset="UTF-8"',
+      "Cache-Control": "no-store",
+      "X-Robots-Tag": "noindex, nofollow",
     },
   });
 }
