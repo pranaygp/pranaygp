@@ -1,8 +1,32 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getVisiblePosts } from "@/lib/posts";
+import { getAllKudos } from "@/lib/kudos";
 import { socials, contact, tools } from "@/lib/links";
 import { appearances, youTubeThumb } from "@/lib/appearances";
+import { projects, type Project } from "@/lib/projects";
+import { getVscodeInstalls, getNpmWeekly, compactNumber } from "@/lib/metrics";
+import KudosBadge from "@/components/KudosBadge";
+
+// Live kudos + project metrics come from external sources, so render dynamically.
+export const dynamic = "force-dynamic";
+
+// Resolve each project's featured metric to a display string.
+async function resolveMetric(
+  p: Project
+): Promise<{ value: string; label: string }> {
+  const f = p.featured;
+  if (f.type === "static") return { value: f.value, label: "" };
+  if (f.type === "vscode-installs") {
+    const n = await getVscodeInstalls(f.extensionId);
+    return { value: n ? compactNumber(n) : "—", label: f.label };
+  }
+  if (f.type === "npm-weekly") {
+    const n = await getNpmWeekly(f.pkg);
+    return { value: n ? compactNumber(n) : "—", label: f.label };
+  }
+  return { value: "", label: "" };
+}
 
 export const metadata = {
   title: "Pranay Prakash",
@@ -95,8 +119,10 @@ function InlineLinks({
   );
 }
 
-export default function Home() {
-  const posts = getVisiblePosts().slice(0, 5);
+export default async function Home() {
+  const posts = getVisiblePosts();
+  const kudos = await getAllKudos();
+  const projectMetrics = await Promise.all(projects.map(resolveMetric));
   const talks = [...appearances].sort((a, b) => (a.date > b.date ? -1 : 1));
 
   return (
@@ -129,6 +155,63 @@ export default function Home() {
         </p>
       </header>
 
+      {/* Projects */}
+      {projects.length > 0 && (
+        <section>
+          <SectionHeading>Projects</SectionHeading>
+          <div className="space-y-5">
+            {projects.map((p, i) => {
+              const m = projectMetrics[i];
+              return (
+                <div
+                  key={p.name}
+                  className="rounded-lg border border-neutral-800 bg-neutral-900/40 p-5 transition-colors hover:border-neutral-700"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <a
+                      href={p.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-lg font-semibold text-neutral-100 hover:text-blue-400 transition-colors"
+                    >
+                      {p.name}
+                    </a>
+                    <div className="shrink-0 text-right">
+                      <div className="text-xl font-bold text-neutral-100 tabular-nums leading-none">
+                        {m.value}
+                      </div>
+                      {m.label && (
+                        <div className="mt-1 text-[10px] uppercase tracking-wider text-neutral-500">
+                          {m.label}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-neutral-400 max-w-prose">
+                    {p.description}
+                  </p>
+                  {p.links && p.links.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {p.links.map((l) => (
+                        <a
+                          key={l.href}
+                          href={l.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="rounded-full border border-neutral-700 px-2.5 py-1 text-xs font-medium text-neutral-300 hover:border-blue-500/50 hover:bg-blue-500/10 hover:text-blue-300 transition-colors"
+                        >
+                          {l.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
       {/* Writing */}
       <section>
         <SectionHeading>Writing</SectionHeading>
@@ -145,7 +228,7 @@ export default function Home() {
                   <time className="text-sm text-neutral-600 tabular-nums shrink-0 w-24">
                     {post.date}
                   </time>
-                  <span className="text-neutral-200 group-hover:text-blue-400 transition-colors">
+                  <span className="flex-1 text-neutral-200 group-hover:text-blue-400 transition-colors">
                     {post.title}
                   </span>
                   {post.draft && (
@@ -153,19 +236,14 @@ export default function Home() {
                       Draft
                     </span>
                   )}
+                  <span className="shrink-0 text-sm">
+                    <KudosBadge count={kudos[post.slug] ?? 0} />
+                  </span>
                 </Link>
               </li>
             ))}
           </ul>
         )}
-        <p className="mt-4">
-          <Link
-            href="/blog"
-            className="text-sm text-neutral-500 hover:text-neutral-300 transition-colors"
-          >
-            All essays →
-          </Link>
-        </p>
       </section>
 
       {/* Appearances */}

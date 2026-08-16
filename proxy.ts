@@ -57,9 +57,9 @@ export function proxy(req: NextRequest) {
     case "blog": {
       // Legacy blog.pranay.gp/* → canonical apex. Preserves old backlinks.
       // blog.pranay.gp/<slug>  → https://pranay.gp/blog/<slug>
-      // blog.pranay.gp/        → https://pranay.gp/blog
+      // blog.pranay.gp/        → https://pranay.gp/ (homepage is the index)
       const seg = url.pathname.replace(/^\/+|\/+$/g, "");
-      const dest = seg ? `https://pranay.gp/blog/${seg}` : "https://pranay.gp/blog";
+      const dest = seg ? `https://pranay.gp/blog/${seg}` : "https://pranay.gp/";
       return redirect(dest, 301);
     }
     case "pranay": // if there's no subdomain, it'll show up as "pranay"
@@ -75,8 +75,12 @@ export function proxy(req: NextRequest) {
         if (unauthorized) return unauthorized;
         return NextResponse.next();
       }
-      // Serve the Next.js blog for the main domain, BUT first honor the old
-      // flat post URLs (pranay.gp/<slug>) by redirecting them to /blog/<slug>.
+      // The blog index now lives on the homepage — redirect the old /blog
+      // index to /. Individual posts still render at /blog/<slug>.
+      if (url.pathname === "/blog" || url.pathname === "/blog/") {
+        return redirect("https://pranay.gp/", 301);
+      }
+      // Honor the old flat post URLs (pranay.gp/<slug>) → /blog/<slug>.
       const seg = url.pathname.replace(/^\/+|\/+$/g, "");
       if (legacySlugs.has(seg)) {
         return redirect(`https://pranay.gp/blog/${seg}${url.search}`, 301);
