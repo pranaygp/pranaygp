@@ -12,6 +12,7 @@ const descriptions: Record<string, string> = {
   li: "Linkedin",
   resume: "Download my resume (outdated)",
   mirror: "A mirror",
+  avatar: "Inclusive Avatar Generator",
 };
 
 const hidden: Record<string, string> = {
@@ -72,6 +73,9 @@ export function middleware(req: NextRequest) {
     case "li":
     case "linkedin":
       return redirect("https://www.linkedin.com/in/pranaygp");
+    case "avatar":
+      url.host = "avatar-teal-seven.vercel.app";
+      return rewrite(url);
     default:
       // For localhost or unknown subdomains, serve the app
       if (
