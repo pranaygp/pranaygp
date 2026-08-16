@@ -66,10 +66,20 @@ export default function Home() {
     <main className="space-y-16">
       {/* Intro */}
       <header>
-        <h1 className="text-2xl font-bold text-neutral-100 tracking-tight">
-          Pranay Prakash
-        </h1>
-        <p className="text-neutral-400 mt-3 leading-relaxed max-w-prose">
+        <div className="flex items-center gap-4">
+          <Image
+            src="/avatar.webp"
+            alt="Pranay Prakash"
+            width={56}
+            height={56}
+            priority
+            className="rounded-full border border-neutral-800 shrink-0"
+          />
+          <h1 className="text-2xl font-bold text-neutral-100 tracking-tight">
+            Pranay Prakash
+          </h1>
+        </div>
+        <p className="text-neutral-400 mt-4 leading-relaxed max-w-prose">
           Engineer. I build developer tools — most recently the{" "}
           <a
             href="https://useworkflow.dev"
