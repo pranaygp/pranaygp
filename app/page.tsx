@@ -7,6 +7,7 @@ import { appearances, youTubeThumb } from "@/lib/appearances";
 import { projects, type Project } from "@/lib/projects";
 import { getVscodeInstalls, getNpmWeekly, compactNumber } from "@/lib/metrics";
 import KudosBadge from "@/components/KudosBadge";
+import { socialIcon } from "@/components/SocialIcons";
 
 // Live kudos + project metrics come from external sources, so render dynamically.
 export const dynamic = "force-dynamic";
@@ -153,6 +154,23 @@ export default async function Home() {
           at Vercel. This is where I keep my writing, a few things I&apos;ve
           made, and the places you can find me.
         </p>
+
+        {/* Social links — icon row, top of the page */}
+        <nav className="mt-5 flex flex-wrap items-center gap-2.5">
+          {socials.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={l.label}
+              title={l.label}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-neutral-800 text-neutral-400 hover:text-neutral-100 hover:border-neutral-600 hover:bg-neutral-800/50 transition-colors"
+            >
+              {socialIcon(l.label, "h-4 w-4")}
+            </a>
+          ))}
+        </nav>
       </header>
 
       {/* Projects */}
@@ -330,12 +348,6 @@ export default async function Home() {
           </ul>
         </section>
       )}
-
-      {/* Links */}
-      <section>
-        <SectionHeading>Links</SectionHeading>
-        <InlineLinks items={socials} />
-      </section>
 
       {/* Contact */}
       <section>
