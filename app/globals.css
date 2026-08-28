@@ -49,6 +49,28 @@
     @apply bg-transparent p-0 text-sm;
   }
 
+  /* Shiki-highlighted blocks. The <pre> is the frame and the <code> scrolls, so
+     the filename bar stays put when a long line is scrolled sideways. */
+  .prose pre.shiki {
+    @apply my-6 overflow-hidden rounded-lg border border-neutral-800 p-0;
+    background-color: theme("colors.neutral.900") !important;
+  }
+
+  /* Filename bar, drawn from the fence info string (```ts title="foo.ts"). */
+  .prose pre.shiki[data-title]::before {
+    content: attr(data-title);
+    @apply block border-b border-neutral-800 px-4 py-2 font-mono text-xs text-neutral-500;
+  }
+
+  .prose pre.shiki code {
+    @apply block overflow-x-auto p-4 text-sm leading-relaxed;
+  }
+
+  /* Caption sitting directly under a code block. */
+  .prose .code-caption {
+    @apply -mt-4 mb-6 text-sm text-neutral-500;
+  }
+
   .prose blockquote {
     @apply border-l-2 border-neutral-700 pl-4 italic text-neutral-400 my-4;
   }

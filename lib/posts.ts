@@ -1,8 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { remark } from "remark";
-import html from "remark-html";
+import { renderMarkdown } from "./markdown";
 
 export interface PostMeta {
   slug: string;
@@ -14,6 +13,7 @@ export interface PostMeta {
   kudos: number;
   source?: string;
   originalUrl?: string;
+  repostOf?: { name: string; url: string };
 }
 
 export interface Post extends PostMeta {
@@ -66,6 +66,7 @@ export function getAllPosts(): PostMeta[] {
         kudos: typeof data.kudos === "number" ? data.kudos : 0,
         source: data.source,
         originalUrl: data.original_url,
+        repostOf: data.repost_of,
       });
     }
   }
@@ -108,8 +109,7 @@ export async function getPost(slug: string): Promise<Post | null> {
       const fileContents = fs.readFileSync(filePath, "utf-8");
       const { data, content } = matter(fileContents);
 
-      const result = await remark().use(html, { sanitize: false }).process(content);
-      const contentHtml = result.toString();
+      const contentHtml = await renderMarkdown(content);
 
       const excerpt =
         content
@@ -129,6 +129,7 @@ export async function getPost(slug: string): Promise<Post | null> {
         kudos: typeof data.kudos === "number" ? data.kudos : 0,
         source: data.source,
         originalUrl: data.original_url,
+        repostOf: data.repost_of,
         contentHtml,
       };
     }

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getPost, getAllSlugs } from "@/lib/posts";
 import { getKudos } from "@/lib/kudos";
 import KudosButton from "@/components/KudosButton";
+import RepostCallout from "@/components/RepostCallout";
 
 export async function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -91,6 +92,10 @@ export default async function BlogPost({
             </div>
           )}
         </header>
+
+        {post.repostOf && (
+          <RepostCallout name={post.repostOf.name} url={post.repostOf.url} />
+        )}
 
         <div
           className="prose"
