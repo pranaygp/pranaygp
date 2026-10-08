@@ -46,10 +46,13 @@ export const projects: Project[] = [
   },
   {
     name: "Windsor",
-    href: "https://windsor.io",
+    href: "https://www.ycombinator.com/companies/windsor",
     description:
       "My startup for 5 years (YC W19). Personalized video at scale for D2C brands. Acquired by Front in 2023.",
     featured: { type: "static", value: "YC W19 · acquired 2023" },
+    links: [
+      { label: "Acquisition", href: "https://front.com/blog/front-acquires-windsor-io" },
+    ],
   },
   {
     name: "Qiuling",
