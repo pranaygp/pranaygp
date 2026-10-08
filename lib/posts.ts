@@ -13,7 +13,7 @@ export interface PostMeta {
   kudos: number;
   source?: string;
   originalUrl?: string;
-  repostOf?: { name: string; url: string };
+  repostOf?: { name: string; url: string; coauthors?: string[] };
 }
 
 export interface Post extends PostMeta {

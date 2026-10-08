@@ -1,9 +1,11 @@
 export default function RepostCallout({
   name,
   url,
+  coauthors,
 }: {
   name: string;
   url: string;
+  coauthors?: string[];
 }) {
   return (
     <aside className="mb-10 flex gap-3 rounded-lg border border-neutral-800 bg-neutral-900/50 px-4 py-3">
@@ -18,7 +20,9 @@ export default function RepostCallout({
         >
           {name}
         </a>
-        , where I wrote it.
+        {coauthors?.length
+          ? `, where I co-wrote it with ${new Intl.ListFormat("en").format(coauthors)}.`
+          : ", where I wrote it."}
       </p>
     </aside>
   );

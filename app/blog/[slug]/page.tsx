@@ -94,7 +94,11 @@ export default async function BlogPost({
         </header>
 
         {post.repostOf && (
-          <RepostCallout name={post.repostOf.name} url={post.repostOf.url} />
+          <RepostCallout
+            name={post.repostOf.name}
+            url={post.repostOf.url}
+            coauthors={post.repostOf.coauthors}
+          />
         )}
 
         <div
