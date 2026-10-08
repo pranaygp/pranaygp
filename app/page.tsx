@@ -205,15 +205,43 @@ export default async function Home() {
           <ul className="space-y-3">
             {posts.map((post) => (
               <li key={post.slug}>
+                {/* Reposts of pieces first published elsewhere sit a step back
+                    from native posts and carry the same ↗ as project links. */}
                 <Link
                   href={`/blog/${post.slug}`}
+                  title={
+                    post.repostOf
+                      ? `Originally published on the ${post.repostOf.name}`
+                      : undefined
+                  }
                   className="group flex items-baseline gap-3"
                 >
-                  <time className="text-sm text-neutral-600 tabular-nums shrink-0 w-24">
+                  <time
+                    className={`text-sm tabular-nums shrink-0 w-24 ${
+                      post.repostOf ? "text-neutral-700" : "text-neutral-600"
+                    }`}
+                  >
                     {post.date}
                   </time>
-                  <span className="flex-1 text-neutral-200 group-hover:text-rose-400 transition-colors">
+                  <span
+                    className={`flex-1 group-hover:text-rose-400 transition-colors ${
+                      post.repostOf ? "text-neutral-500" : "text-neutral-100"
+                    }`}
+                  >
                     {post.title}
+                    {post.repostOf && (
+                      <>
+                        <span
+                          aria-hidden="true"
+                          className="ml-1 text-neutral-600 transition-colors group-hover:text-rose-400"
+                        >
+                          {"\u2197\uFE0E"}
+                        </span>
+                        <span className="sr-only">
+                          , originally published on the {post.repostOf.name}
+                        </span>
+                      </>
+                    )}
                   </span>
                   {post.draft && (
                     <span className="text-[10px] text-amber-500/80 font-medium uppercase tracking-wider shrink-0">
