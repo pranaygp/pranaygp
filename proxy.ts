@@ -38,6 +38,16 @@ export function proxy(req: NextRequest) {
   console.log("Subdomain", subdomain);
 
   switch (subdomain) {
+    case "ha": {
+      // Browser shortcut only: Home Assistant stays behind Tailscale and its login.
+      const target = new URL("https://pranaygp-mini.sunfish-map.ts.net:8123/");
+      target.pathname = url.pathname;
+      target.search = url.search;
+      const response = redirect(target.toString(), 307);
+      response.headers.set("Cache-Control", "no-store");
+      response.headers.set("X-Robots-Tag", "noindex, nofollow");
+      return response;
+    }
     case "static":
       return NextResponse.next({
         headers: {
